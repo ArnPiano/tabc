@@ -25,14 +25,14 @@ The function must work in the R environment, be statistically correct, and shoul
 Some tests were done in R and I saw an improvement of 10% by eliminating superfluous conditional statements and uneccessary operations.
 It was soon clear that a lower level language was needed to improve the code further.
 I adopted the Rcpp library to speed up computation.
-The function is statistically correct and takes 15% of the time of the unefficient R one.
+The function is statistically correct (exception made for the  `rand() % n` function used to generate permutations, see later) and takes 15% of the time of the unefficient R one.
 The code is compatible with C++03, therefore some modern functionalities are missing (tuples, lambda functions, etc...)
 
 ### To Do
 
-It is known that `rand() % n` does not generate a uniform distribution; C++ offers ways to generate uniform distributions that are included in the C++11 standard and were not used in this project, but they can and should be adopted in stead of the current method.
+It is known that `rand() % n` does not generate a uniform distribution; C++ offers ways to generate uniform distributions (such as `std::uniform_int_distribution` in `<random>` ) that are included in the C++11 standard and were not used in this project, but they can and should be adopted in stead of the current method.
 
-Verify if the following improve computation:
+Verify if the following changes improve computation:
 - Avoid usage of pairs and tuples altoghether.
 - Parallelize computation through RcppThread or similar libraries.
 - Use Rccp types and syntactic sugar.
